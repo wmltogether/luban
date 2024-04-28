@@ -11,6 +11,7 @@ using Luban.Schema.Builtin;
 using Luban.Tmpl;
 using Luban.Utils;
 using NLog;
+using System.Diagnostics.CodeAnalysis;
 using System.Reflection;
 using System.Text;
 
@@ -73,6 +74,7 @@ internal static class Program
 
     private static ILogger s_logger;
 
+    [DynamicDependency(DynamicallyAccessedMemberTypes.All, typeof(CommandOptions))]
     private static void Main(string[] args)
     {
         CommandOptions opts = ParseArgs(args);

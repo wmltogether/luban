@@ -104,6 +104,7 @@ public class GenerationContext
     {
         var refTypes = new Dictionary<string, DefTypeBase>();
         var types = Assembly.TypeList;
+        var exportDefaultGroupEnums = EnvManager.Current.GetBoolOptionOrDefault("", BuiltinOptionNames.ExportEnumDefaultGroup, true, false);
         foreach (var t in types)
         {
             if (!refTypes.ContainsKey(t.FullName))
@@ -112,7 +113,7 @@ public class GenerationContext
                 {
                     TBean.Create(false, bean, null).Apply(RefTypeVisitor.Ins, refTypes);
                 }
-                else if (t is DefEnum && NeedExportNotDefault(t.Groups))
+                else if (t is DefEnum && (NeedExportNotDefault(t.Groups) || exportDefaultGroupEnums))
                 {
                     refTypes.Add(t.FullName, t);
                 }
