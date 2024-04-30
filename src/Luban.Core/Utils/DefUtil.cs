@@ -235,6 +235,11 @@ public static class DefUtil
         {
             throw new Exception("字段切割应该用'sep'，而不是'seq',请检查是否拼写错误");
         }
+        
+        if (attrs.ContainsKey("default"))
+        {
+            throw new Exception("字段默认值填写位置错位，default需要放在标题中，只能用于var定义,请检查是否拼写错误");
+        }
 
         return (typeStr, attrs);
     }
